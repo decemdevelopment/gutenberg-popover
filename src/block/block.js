@@ -6,8 +6,8 @@
  */
 
 //  Import CSS.
-import "./editor.scss";
-import "./style.scss";
+// import "./editor.scss";
+// import "./style.scss";
 
 import _ from 'lodash'
 
@@ -26,7 +26,7 @@ import {
   Button,
 } from "@wordpress/components";
 
-const MyCustomButton = ({ onChange, isActive, ...props }) => {
+const PopoverButton = ({ onChange, isActive, ...props }) => {
 
   const [isOpen, setIsOpen] = useState(false);
   const [allowHTML, setAllowHTML] = useState(false);
@@ -37,17 +37,17 @@ const MyCustomButton = ({ onChange, isActive, ...props }) => {
   const closeModal = () => setIsOpen(false);
 
   const saveModal = () => {
-      onChange(
-        applyFormat(props.value, {
-          type: "decem-blocks/popover",
-          attributes: {
-            enableHTML: `${allowHTML}`,
-            popoverContent: popoverContent ? popoverContent : "cant map from state",
-          },
-        })
-      );
-      setPopoverContent('');
-      closeModal();
+    onChange(
+      applyFormat(props.value, {
+        type: "decem-blocks/popover",
+        attributes: {
+          enableHTML: `${allowHTML}`,
+          popoverContent: popoverContent ? popoverContent : "cant map from state",
+        },
+      })
+    );
+    setPopoverContent('');
+    closeModal();
   }
 
   function handleAddingPopover() {
@@ -67,7 +67,7 @@ const MyCustomButton = ({ onChange, isActive, ...props }) => {
       // If user wants to edit old popover text, its value is in oldSavedContent
       const oldSavedContent = _.get(props, `value.activeFormats[0].unregisteredAttributes.popovercontent`);
       const newSavedContent = _.get(props, 'activeAttributes.popoverContent');
-      
+
       const textAreaValue = oldSavedContent || newSavedContent;
 
       setPopoverContent(textAreaValue)
@@ -81,12 +81,11 @@ const MyCustomButton = ({ onChange, isActive, ...props }) => {
           },
         })
       );
-      
+
     }
   }
 
   function handleDeletingPopover() {
-
     closeModal();
     setPopoverContent(null);
     onChange(
@@ -124,8 +123,8 @@ const MyCustomButton = ({ onChange, isActive, ...props }) => {
           </div>
         </Popover>
       ) : (
-        ""
-      )}
+          ""
+        )}
     </Fragment>
   );
 };
@@ -134,5 +133,5 @@ registerFormatType("decem-blocks/popover", {
   title: "Sample output",
   tagName: "span",
   className: "popover",
-  edit: MyCustomButton,
+  edit: PopoverButton,
 });
