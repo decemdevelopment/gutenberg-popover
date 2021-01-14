@@ -16,7 +16,7 @@ const { registerBlockType } = wp.blocks; // Import registerBlockType() from wp.b
 
 const { useState, Fragment } = wp.element;
 const { RichTextToolbarButton, openModal } = wp.blockEditor;
-const { registerFormatType, toggleFormat, applyFormat } = wp.richText;
+const { registerFormatType, toggleFormat, applyFormat, removeFormat } = wp.richText;
 
 import {
   Popover,
@@ -48,9 +48,9 @@ const MyCustomButton = ({ onChange, isActive, ...props }) => {
       closeModal();
   }
 
-  function handleButton() {
+  function handleAddingPopover() {
     openModal();
-    if (!isActive) {
+    if (!isActive) { // there is no popover on highlighted text
       onChange(
         applyFormat(props.value, {
           type: "decem-blocks/popover",
@@ -60,7 +60,7 @@ const MyCustomButton = ({ onChange, isActive, ...props }) => {
           },
         })
       );
-    } else {
+    } else { // there is already popover on highlighted text
       // When user adds text for popover, it gets saved newSavedContent
       // If user wants to edit old popover text, its value is in oldSavedContent
       const oldSavedContent = _.get(props, `value.activeFormats[0].unregisteredAttributes.popovercontent`);
@@ -69,6 +69,7 @@ const MyCustomButton = ({ onChange, isActive, ...props }) => {
       const textAreaValue = oldSavedContent || newSavedContent;
 
       setPopoverContent(textAreaValue)
+
       onChange(
         applyFormat(props.value, {
           type: "decem-blocks/popover",
@@ -80,6 +81,15 @@ const MyCustomButton = ({ onChange, isActive, ...props }) => {
       );
       
     }
+  }
+
+  function handleDeletingPopover() {
+
+    closeModal();
+    setPopoverContent(null);
+    onChange(
+      removeFormat(props.value, 'decem-blocks/popover')
+    )
   }
 
   function handleTextArea(e) {
@@ -95,7 +105,7 @@ const MyCustomButton = ({ onChange, isActive, ...props }) => {
       <RichTextToolbarButton
         icon="editor-code"
         title="Enable Popover"
-        onClick={handleButton}
+        onClick={handleAddingPopover}
         isActive={isActive}
       ></RichTextToolbarButton>
       {isOpen ? (
@@ -108,7 +118,7 @@ const MyCustomButton = ({ onChange, isActive, ...props }) => {
               onChange={handleCheckbox}
             />
             <button onClick={saveModal}>Save</button>
-            <button onClick={closeModal}>Cancel</button>
+            <button onClick={handleDeletingPopover}>Delete Popover</button>
           </div>
         </Popover>
       ) : (
