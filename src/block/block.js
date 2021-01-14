@@ -18,10 +18,12 @@ const { useState, Fragment } = wp.element;
 const { RichTextToolbarButton, openModal } = wp.blockEditor;
 const { registerFormatType, toggleFormat, applyFormat, removeFormat } = wp.richText;
 
+
 import {
   Popover,
   TextareaControl,
   ToggleControl,
+  Button,
 } from "@wordpress/components";
 
 const MyCustomButton = ({ onChange, isActive, ...props }) => {
@@ -117,8 +119,8 @@ const MyCustomButton = ({ onChange, isActive, ...props }) => {
               checked={allowHTML}
               onChange={handleCheckbox}
             />
-            <button onClick={saveModal}>Save</button>
-            <button onClick={handleDeletingPopover}>Delete Popover</button>
+            <Button onClick={saveModal} isPrimary className="btn">Save</Button>
+            <Button onClick={handleDeletingPopover} isPrimary className="btn">Delete Popover</Button>
           </div>
         </Popover>
       ) : (

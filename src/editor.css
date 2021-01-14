@@ -9,3 +9,12 @@
   color: red;
   transform: scale(5);
 }
+
+.btn {
+  margin-right: 10px;
+}
+
+.popover-wrapper {
+  padding: 10px;
+  border-radius: 4px;
+}
