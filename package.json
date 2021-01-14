@@ -1,0 +1,23 @@
+{
+  "name": "popover",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "start": "wp-scripts start",
+    "build": "wp-scripts build",
+    "lint:js": "wp-scripts lint-js src/index.js",
+    "lint:js-fix": "wp-scripts lint-js src/index.js --fix",
+    "lint:css": "wp-scripts lint-style '**/*.css'"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@wordpress/scripts": "12.6.1"
+  },
+  "dependencies": {
+    "@tippyjs/react": "^4.2.0",
+    "@wordpress/components": "^12.0.1"
+  }
+}
