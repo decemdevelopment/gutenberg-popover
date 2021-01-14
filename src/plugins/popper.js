@@ -2554,12 +2554,16 @@
 });
 //# sourceMappingURL=tippy-bundle.umd.min.js.map
 
-console.log(document.querySelector(".popover"));
-tippy(".popover", {
-  animation: "scale",
-  animateFill: false,
-  maxWidth: 240,
-  duration: 0,
-  arrow: false,
-  content: "My tooltip!",
+[...document.querySelectorAll(".popover")].forEach(function (element) {
+  const enableHTML = element.getAttribute("enablehtml");
+
+  tippy(element, {
+    animation: "scale",
+    animateFill: false,
+    maxWidth: 240,
+    duration: 0,
+    arrow: false,
+    content: (reference) => reference.getAttribute("popovercontent"),
+    allowHTML: enableHTML === "true" ? true : false,
+  });
 });
