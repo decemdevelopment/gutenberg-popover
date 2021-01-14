@@ -11,9 +11,6 @@ import "./style.scss";
 
 import _ from 'lodash'
 
-// import tippy from "tippy.js";
-// import "tippy.js/dist/tippy.css";
-
 const { __ } = wp.i18n; // Import __() from wp.i18n
 const { registerBlockType } = wp.blocks; // Import registerBlockType() from wp.blocks
 
@@ -47,6 +44,8 @@ const MyCustomButton = ({ onChange, isActive, ...props }) => {
           },
         })
       );
+      setPopoverContent('');
+      closeModal();
   }
 
   function handleButton() {
@@ -64,7 +63,7 @@ const MyCustomButton = ({ onChange, isActive, ...props }) => {
     } else {
       // When user adds text for popover, it gets saved newSavedContent
       // If user wants to edit old popover text, its value is in oldSavedContent
-      const oldSavedContent = _.get(props, 'value.activeFormats[0].unregisteredAttributes.popovercontent');
+      const oldSavedContent = _.get(props, `value.activeFormats[0].unregisteredAttributes.popovercontent`);
       const newSavedContent = _.get(props, 'activeAttributes.popoverContent');
       
       const textAreaValue = oldSavedContent || newSavedContent;
