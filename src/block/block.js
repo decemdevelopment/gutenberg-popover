@@ -13,14 +13,9 @@ import _ from 'lodash'
 
 import { Icon } from '@wordpress/components'
 
-const { __ } = wp.i18n; // Import __() from wp.i18n
-const { registerBlockType } = wp.blocks; // Import registerBlockType() from wp.blocks
-
-const { useState, Fragment } = wp.element;
-const { RichTextToolbarButton, openModal } = wp.blockEditor;
-const { registerFormatType, toggleFormat, applyFormat, removeFormat } = wp.richText;
-
-
+import { useState, Fragment } from '@wordpress/element'
+import { RichTextToolbarButton } from '@wordpress/block-editor'
+import { registerFormatType, applyFormat, removeFormat } from '@wordpress/rich-text'
 import {
   Popover,
   TextareaControl,
