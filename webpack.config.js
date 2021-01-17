@@ -31,8 +31,7 @@ const cssLoaders = [
 		},
 	},
 ];
-console.log('QQQQQQQQQQQ', __dirname);
-console.log('WWWWWWWWWWWWW', path.resolve(__dirname, "src/block"));
+
 module.exports = {
 	...defaultConfig,
 	module: {
@@ -45,7 +44,7 @@ module.exports = {
 					path.resolve(__dirname, "src/block")
 				],
 				use: [
-					...cssLoaders,
+					// ...cssLoaders,
 					{
 						loader: require.resolve('sass-loader'),
 						options: {
